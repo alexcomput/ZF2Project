@@ -1,1 +1,4 @@
-# ZF2Project
+ZendSkeletonApplication
+======================
+
+Primeiro Projeto com doctrine
