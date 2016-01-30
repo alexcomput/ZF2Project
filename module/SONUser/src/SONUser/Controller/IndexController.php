@@ -17,8 +17,8 @@ class IndexController extends AbstractActionController
             $form->setData($request->getPost());
             if ($form->isValid()) {
                 $service = $this->getServiceLocator()->get('SONUser\Service\User');
-                if ($service->insert($request->getPost()->toArray())) {
-                    $fm = $this->flashMessenger()
+                if ($entity = $service->insert($request->getPost()->toArray())) {
+                    $fn = $this->flashMessenger()
                             ->setNamespace('SONUser')
                             ->addMessage('Usuário cadastrado com Sucesso');
                 }
@@ -29,6 +29,18 @@ class IndexController extends AbstractActionController
                 ->setNamespace('SONUser')
                 ->getMessages();
         return new ViewModel(array('form' => $form, 'messages' => $messages));
+    }
+
+    public function activateAction()
+    {
+        $activationKey = $this->params()->fromRoute('key');
+        $userService = $this->getServiceLocator()->get("SONUser\Service\User");
+        $result = $userService->activate($activationKey);
+        if ($result) {
+            return new ViewModel(array('user' => $result));
+        } else {
+            return new ViewModel();
+        }
     }
 
 //    public function registerAction()

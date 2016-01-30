@@ -14,6 +14,7 @@ use Zend\Stdlib\Hydrator;
  * @ORM\Table(name="sonuser_user")
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
+ * @ORM\Entity(repositoryClass = "SONUser\Entity\UserRepository")
  */
 class User
 {
@@ -59,12 +60,13 @@ class User
 //    private $salt;
 //
 //
-//    /**
-//     * @var boolean
-//     * 
-//     * @ORM\Column(name= "active " , type="boolean", nullable = false)
-//     */
-//    private $active;
+    /**
+     * @var boolean
+     * 
+     * @ORM\Column(name= "active " , type="boolean", nullable = false)
+     */
+    private $active;
+
 //
 //    /*
 //     * @var string
@@ -177,9 +179,6 @@ class User
 //        return $this->updatedAt;
 //    }
 //
-//    function getActive() {
-//        return $this->active;
-//    }
 //
 //    function getCreatedAt() {
 //        return $this->createdAt;
@@ -193,11 +192,17 @@ class User
 //        $this->updatedAt = new \DateTime("now");
 //        return $this;
 //    }
-//
-//    function setActive($active) {
-//        $this->active = $active;
-//        return $this;
-//    }
+    function getActive()
+    {
+        return $this->active;
+    }
+
+    function setActive($active)
+    {
+        $this->active = $active;
+        return $this;
+    }
+
 //
 //    function setCreatedAt() {
 //        $this->createdAt = new \DateTime("now");

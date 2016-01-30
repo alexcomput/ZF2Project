@@ -45,7 +45,7 @@ class User extends Form
             'type' => '\Zend\Form\Element\Submit',
             'attributes' => array(
                 'value' => 'Salvar',
-                'class' => 'btn-sucess'
+                'class' => 'btn-success'
             )
         ));
     }
