@@ -16,6 +16,7 @@ class User extends AbstractService
     public function __construct(EntityManager $em, SmtpTransport $transport, $view)
     {
         parent::__construct($em);
+        
         $this->entity = 'SONUser\Entity\User';
         $this->transport = $transport;
         $this->view = $view;
@@ -25,15 +26,16 @@ class User extends AbstractService
     {
         $entity = parent::insert($data);
 
-        $dataEmail = array('nome' => $data['nome'], 'activationKey' => $entity->getActivationKey());
+        //$dataEmail = array('nome' => $data['nome'], 'activationKey' => $entity->getActivationKey());
 
         if ($entity) {
-            $mail = new Mail($this->transport, $this->view, 'add-user');
-            $mail->setSubject('Confirmação de Cadastro')
-                    ->setTo($data['email'])
-                    ->setData($dataEmail)
-                    ->prepare()
-                    ->send();
+            //$mail = new Mail($this->transport, $this->view, 'add-user');
+            /* /*$mail->setSubject('Confirmação de Cadastro')
+              ->setTo($data['email'])
+              ->setData($dataEmail)
+              ->prepare()
+              ->send();
+             * */
             return $entity;
         }
     }

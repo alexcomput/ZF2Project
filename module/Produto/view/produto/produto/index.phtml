@@ -1,2 +1,17 @@
-<?php 
-echo $this->nome; 
+<h3>Registro</h3>
+
+<?php if ($this->messages): ?>
+    <p>
+        <?php echo $this->messages[0]; ?>
+    </p>
+<?php else: ?>
+    <?php
+    $form = $this->form;
+    $form->setAttribute('action', $this->url('home-produto', array('controller' => 'produto', 'action' => 'index')));
+    $form->prepare();
+    echo $this->form()->openTag($form);
+    echo $this->formCollection($form);
+    echo $this->form()->closeTag();
+    ?>
+<?php endif; ?>
+

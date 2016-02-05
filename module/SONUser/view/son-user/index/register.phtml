@@ -1,4 +1,5 @@
 <h3>Registro</h3>
+
 <?php if ($this->messages): ?>
     <p>
         <?php echo $this->messages[0]; ?>
@@ -6,7 +7,7 @@
 <?php else: ?>
     <?php
     $form = $this->form;
-    $form->setAttribute ('action', $this->url('sonuser-register', array('controller' => 'index', 'action' => 'register')));
+    $form->setAttribute('action', $this->url('sonuser-register', array('controller' => 'index', 'action' => 'register')));
     $form->prepare();
     echo $this->form()->openTag($form);
     echo $this->formCollection($form);

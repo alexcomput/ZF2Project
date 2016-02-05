@@ -6,7 +6,8 @@
         <th>Código</th>
         <th>NOME</th>
          <th>Email</th> 
-         <th>Password</th> 
+         <th>Salt</th> 
+         <th>getActivationKey</th> 
         <th>EDITAR</th>
         <th>EXCLUIR</th>
     </tr>
@@ -16,11 +17,12 @@
             <td><?php echo $f->getId(); ?></td> 
             <td><?php echo $f->getNome(); ?></td>
             <td><?php echo $f->getEmail(); ?></td> 
-            <td><?php echo $f->getPassword(); ?></td> 
+            <td><?php echo $f->getSalt(); ?></td> 
+            <td><?php echo $f->getActivationKey(); ?></td> 
             <td>Editar</td>
             <td>Excluir</td>
         </tr>
     <?php endforeach; ?>
 </table>
-<a href="<?php echo $this->url('home'); ?>">Voltar</a>
+<a href="<?php echo $this->url('sonuser-register'); ?>">Voltar</a>
 

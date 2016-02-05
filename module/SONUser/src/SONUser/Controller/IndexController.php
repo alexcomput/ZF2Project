@@ -11,23 +11,29 @@ class IndexController extends AbstractActionController
 
     public function registerAction()
     {
-        $form = new FormUser;
+
+
+        $form = new FormUser();
         $request = $this->getRequest();
+
         if ($request->isPost()) {
             $form->setData($request->getPost());
             if ($form->isValid()) {
-                $service = $this->getServiceLocator()->get('SONUser\Service\User');
-                if ($entity = $service->insert($request->getPost()->toArray())) {
-                    $fn = $this->flashMessenger()
+                $service = $this->getServiceLocator()->get("SONUser\Service\User");
+                if ($service->insert($request->getPost()->toArray())) {
+                    #flash messages                    
+                    #adiciona mensagens entre 1 request e outro
+                    $fm = $this->flashMessenger()
                             ->setNamespace('SONUser')
-                            ->addMessage('Usuário cadastrado com Sucesso');
+                            ->addMessage("Usuário cadastrado.");
                 }
+
                 return $this->redirect()->toRoute('sonuser-register');
             }
         }
-        $messages = $this->flashMessenger()
-                ->setNamespace('SONUser')
-                ->getMessages();
+
+        $messages = $this->flashMessenger()->setNamespace('SONUser')->getMessages();
+
         return new ViewModel(array('form' => $form, 'messages' => $messages));
     }
 

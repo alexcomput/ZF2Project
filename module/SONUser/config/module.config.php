@@ -5,7 +5,12 @@ namespace SONUser;
 return [
     'router' => [
         'routes' => [
+            #nome da rota
             'sonuser-register' => [
+                # [ Literal ] 
+                # Rota mais simples. 
+                # Pega na url, exatamente o que é escrito.
+                # Não aceita parâmetros
                 'type' => 'Literal',
                 'options' => [
                     'route' => '/register',
@@ -21,7 +26,7 @@ return [
                 'options' => [
                     'route' => '/register/activate[/:key]',
                     'defaults' => [
-                        '__NAMESPACE__' => 'SONUser\Controller\Index',
+                        'controller' => 'SONUser\Controller\Index',
                         'action' => 'activate',
                     ]
                 ]
@@ -48,7 +53,7 @@ return [
         'display_not_found_reason' => true,
         'display_exceptions' => true,
         'doctype' => 'HTML5',
-        'not_found_template' => 'error/404',
+        'no t_found_template' => 'error/404',
         'exception_template' => 'error/index',
         'template_map' => [
             'layout/layout' => __DIR__ . '/../view/layout/layout.phtml',
@@ -65,13 +70,13 @@ return [
             __NAMESPACE__ . '_driver' => [
                 'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
                 'cache' => 'array',
-                'paths' => [__DIR__ . '/../src/' . __NAMESPACE__ . '/Entity'],
+                'paths' => [__DIR__ . '/../src/' . __NAMESPACE__ . '/Entity']
             ],
             'orm_default' => [
                 'drivers' => [
                     __NAMESPACE__ . '\Entity' => __NAMESPACE__ . '_driver'
-                ]
-            ]
+                ],
+            ],
         ],
         'data-fixture' => [
             __NAMESPACE__ . '_fixture' => __DIR__ . '/../src/' . __NAMESPACE__ . '/Fixture',

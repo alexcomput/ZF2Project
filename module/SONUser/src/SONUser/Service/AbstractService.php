@@ -5,11 +5,6 @@ namespace SONUser\Service;
 use Doctrine\ORM\EntityManager;
 use Zend\Stdlib\Hydrator;
 
-/**
- * Description of AbstractService
- *
- * @author alexcomput
- */
 abstract class AbstractService {
 
     /**
@@ -24,8 +19,7 @@ abstract class AbstractService {
         $this->em = $em;
     }
     
-    public function insert(array $data)
-    {
+    public function insert(array $data)    {
         $entity = new $this->entity($data);
         $this->em->persist($entity);
         $this->em->flush();
@@ -34,8 +28,8 @@ abstract class AbstractService {
     
     public function update(array $data)
     {
-        $entity = $this->em->getRepository($this->entity,$data['id']);
-        (new Hydrator\ClassMethods())->hydrateValue($data, $entity);
+        $entity = $this->em->getReference($this->entity,$data['id']);
+        (new Hydrator\ClassMethods())->hydrate($data, $entity);
         $this->em->persist($entity);
         $this->em->flush();
         return $entity;

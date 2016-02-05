@@ -4,25 +4,25 @@ namespace Produto;
 
 return [
     'doctrine' => [
-        'fixture' => [
-            __NAMESPACE__ . '_fixture' => __DIR__ . '/../src/' . __NAMESPACE__ . '/Fixture',
-        ],
         'driver' => [
-            'application_entities' => [
+            __NAMESPACE__ . '_driver' => [
                 'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
                 'cache' => 'array',
-                'paths' => [__DIR__ . '/../src/' . __NAMESPACE__ . '/Entity']
+                'paths' => [__DIR__ . '/../src/' . __NAMESPACE__ . '/Entity'],
             ],
             'orm_default' => [
                 'drivers' => [
-                    __NAMESPACE__ . '\Entity' => 'application_entities'
-                ],
-            ],
-        ]
+                    __NAMESPACE__ . '\Entity' => __NAMESPACE__ . '_driver'
+                ]
+            ]
+        ],
+        'data-fixture' => [
+            __NAMESPACE__ . '_fixture' => __DIR__ . '/../src/' . __NAMESPACE__ . '/Fixture',
+        ],
     ],
     'view_manager' => [
         'template_path_stack' => [
-           __NAMESPACE__ =>__DIR__ . '/../view',
+            __NAMESPACE__ => __DIR__ . '/../view',
         ],
-    ],    
+    ],
 ];

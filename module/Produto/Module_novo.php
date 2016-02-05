@@ -38,7 +38,7 @@ class Module
 
                     return $transport;
                 },
-                'SONUser\Service\User' => function ($sm) {
+                'Produto\Service\Produto' => function ($sm) {
                     return new Service\User($sm->get('Doctrine\ORM\EntityManager'),
                             $sm->get('SONUser\Mail\Transport'), 
                             $sm->get('View'));

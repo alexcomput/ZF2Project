@@ -14,20 +14,14 @@ use Zend\ModuleManager\Feature\ViewHelperProviderInterface;
 use Zend\ModuleManager\Feature\ControllerProviderInterface;
 use Zend\EventManager\EventInterface;
 
-class Module implements 
-    ConfigProviderInterface,
-    AutoloaderProviderInterface,
-    ControllerProviderInterface,    
-    BootstrapListenerInterface,    
-    ControllerPluginProviderInterface,
-    FormElementProviderInterface,
-    ServiceProviderInterface,
-    ViewHelperProviderInterface
+class Module implements
+ConfigProviderInterface, AutoloaderProviderInterface, ControllerProviderInterface, BootstrapListenerInterface, ControllerPluginProviderInterface, FormElementProviderInterface, ServiceProviderInterface, ViewHelperProviderInterface
 {
     /*
      *  necessário em 1 dos modulos não precisa terem todos os modulos 
      * o metodo onBootstrap
-     */ 
+     */
+
     public function onBootstrap(EventInterface $e)
     {
         $eventManager = $e->getApplication()->getEventManager();
@@ -39,11 +33,11 @@ class Module implements
      *  Carrega o restante da configuração
      * extensão dessa classe.
      */
+
     public function getConfig()
     {
         return array_merge(
-            include __DIR__ . '/config/module.config.php',
-            include __DIR__ . '/config/router.config.php'
+                include __DIR__ . '/config/module.config.php', include __DIR__ . '/config/router.config.php'
         );
     }
 
@@ -70,9 +64,14 @@ class Module implements
 
     public function getServiceConfig()
     {
-        return array_merge_recursive(
-            include __DIR__ . '/config/service.config.php',
-            include __DIR__ . '/config/entity.config.php'
+//        return array_merge_recursive(
+//            include __DIR__ . '/config/service.config.php',
+//            include __DIR__ . '/config/entity.config.php'
+//        );
+        return array(
+            'Produto\Service\Produto' => function ($sm) {
+                return new Service\Produto($sm->get('Doctrine\ORM\EntityManager'), $sm->get('View'));
+            }
         );
     }
 
@@ -84,7 +83,6 @@ class Module implements
     public function getControllerConfig()
     {
         return include __DIR__ . '/config/controller.config.php';
-        
     }
 
 }

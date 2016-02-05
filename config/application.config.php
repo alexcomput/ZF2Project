@@ -14,7 +14,7 @@ return array(
         'DoctrineDataFixtureModule',
         'SONUser',
         'SONBase',
-        #'Produto',
+        'Produto',
     ),
 
     // These are various options for the listeners attached to the ModuleManager
